@@ -27,7 +27,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="fa" dir="rtl" className={`${vazir.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
         <Header />
-        <main className="flex-1 pb-20 lg:pb-4">{children}</main>
+        <main className="flex-1 pb-[calc(var(--bottom-nav-height)+env(safe-area-inset-bottom,0px))] lg:pb-4">
+          {children}
+        </main>
         <Footer />
         <BottomNav />
         <Toaster />

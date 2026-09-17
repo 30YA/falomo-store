@@ -30,8 +30,8 @@ export function BottomNav() {
   const shownCart = mounted ? cartCount : 0;
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-line)] bg-white/95 backdrop-blur lg:hidden">
-      <ul className="mx-auto flex max-w-lg items-center justify-between px-2 py-1.5">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-line)] bg-white/95 backdrop-blur lg:hidden pb-[env(safe-area-inset-bottom)]">
+      <ul className="mx-auto flex h-[var(--bottom-nav-height)] max-w-lg items-center justify-between px-2">
         {items.map(({ href, label, icon: Icon }) => {
           const active =
             href === "/"
@@ -42,7 +42,7 @@ export function BottomNav() {
               <Link
                 href={href}
                 className={cn(
-                  "relative flex flex-col items-center gap-0.5 rounded-xl px-1 py-1.5 text-[10px] transition",
+                  "relative flex h-full flex-col items-center justify-center gap-0.5 rounded-xl px-1 text-[10px] transition",
                   active
                     ? "text-[var(--color-brand)]"
                     : "text-[var(--color-ink-muted)]",
@@ -51,7 +51,7 @@ export function BottomNav() {
                 <Icon className={cn("h-5 w-5", active && "stroke-[2.25]")} />
                 <span>{label}</span>
                 {href === "/cart" && shownCart > 0 && (
-                  <span className="absolute top-0 left-1/2 flex h-4 min-w-4 -translate-x-1/2 translate-x-3 items-center justify-center rounded-full bg-[var(--color-brand)] px-1 text-[9px] font-bold text-white">
+                  <span className="absolute top-1 left-1/2 flex h-4 min-w-4 -translate-x-1/2 translate-x-3 items-center justify-center rounded-full bg-[var(--color-brand)] px-1 text-[9px] font-bold text-white">
                     {toPersianDigits(shownCart)}
                   </span>
                 )}

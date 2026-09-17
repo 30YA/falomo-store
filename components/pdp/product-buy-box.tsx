@@ -213,51 +213,97 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
         ))}
       </div>
 
-      <div className="sticky bottom-20 z-20 -mx-4 border-t border-[var(--color-line)] bg-white/95 p-4 backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center rounded-xl border border-[var(--color-line)] bg-white">
-            <button
-              type="button"
-              className="flex h-11 w-11 items-center justify-center"
-              onClick={() => setQty((q) => Math.max(1, q - 1))}
-              aria-label="کاهش تعداد"
-            >
-              <Minus className="h-4 w-4" />
-            </button>
-            <span className="min-w-8 text-center font-medium">
-              {toPersianDigits(qty)}
-            </span>
-            <button
-              type="button"
-              className="flex h-11 w-11 items-center justify-center"
-              onClick={() => setQty((q) => q + 1)}
-              aria-label="افزایش تعداد"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
-          </div>
-
-          <Button
-            onClick={handleAdd}
-            className="flex-1"
-            size="lg"
-            disabled={!product.inStock}
-          >
-            <ShoppingBag className="h-4 w-4" />
-            {product.inStock ? "افزودن به سبد" : "ناموجود"}
-          </Button>
-
-          <Button
-            variant="outline"
-            size="icon"
-            aria-label="علاقه‌مندی"
-            onClick={handleWishlist}
-            className={cn(isWishlisted && "text-[var(--color-brand)]")}
-          >
-            <Heart className={cn("h-4 w-4", isWishlisted && "fill-current")} />
-          </Button>
-        </div>
+      {/* Desktop / tablet inline CTA */}
+      <div className="hidden sm:block">
+        <BuyActions
+          qty={qty}
+          setQty={setQty}
+          onAdd={handleAdd}
+          onWishlist={handleWishlist}
+          inStock={product.inStock}
+          isWishlisted={isWishlisted}
+        />
       </div>
+
+      {/* Mobile fixed CTA — flush above bottom navigation */}
+      <div
+        className="fixed inset-x-0 z-30 border-t border-[var(--color-line)] bg-white/95 px-4 py-3 shadow-[0_-8px_24px_-12px_rgba(15,23,42,0.2)] backdrop-blur sm:hidden"
+        style={{
+          bottom:
+            "calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px))",
+        }}
+      >
+        <BuyActions
+          qty={qty}
+          setQty={setQty}
+          onAdd={handleAdd}
+          onWishlist={handleWishlist}
+          inStock={product.inStock}
+          isWishlisted={isWishlisted}
+        />
+      </div>
+    </div>
+  );
+}
+
+function BuyActions({
+  qty,
+  setQty,
+  onAdd,
+  onWishlist,
+  inStock,
+  isWishlisted,
+}: {
+  qty: number;
+  setQty: (updater: (q: number) => number) => void;
+  onAdd: () => void;
+  onWishlist: () => void;
+  inStock: boolean;
+  isWishlisted: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex items-center rounded-xl border border-[var(--color-line)] bg-white">
+        <button
+          type="button"
+          className="flex h-11 w-11 items-center justify-center"
+          onClick={() => setQty((q) => Math.max(1, q - 1))}
+          aria-label="کاهش تعداد"
+        >
+          <Minus className="h-4 w-4" />
+        </button>
+        <span className="min-w-8 text-center font-medium">
+          {toPersianDigits(qty)}
+        </span>
+        <button
+          type="button"
+          className="flex h-11 w-11 items-center justify-center"
+          onClick={() => setQty((q) => q + 1)}
+          aria-label="افزایش تعداد"
+        >
+          <Plus className="h-4 w-4" />
+        </button>
+      </div>
+
+      <Button
+        onClick={onAdd}
+        className="flex-1"
+        size="lg"
+        disabled={!inStock}
+      >
+        <ShoppingBag className="h-4 w-4" />
+        {inStock ? "افزودن به سبد" : "ناموجود"}
+      </Button>
+
+      <Button
+        variant="outline"
+        size="icon"
+        aria-label="علاقه‌مندی"
+        onClick={onWishlist}
+        className={cn(isWishlisted && "text-[var(--color-brand)]")}
+      >
+        <Heart className={cn("h-4 w-4", isWishlisted && "fill-current")} />
+      </Button>
     </div>
   );
 }

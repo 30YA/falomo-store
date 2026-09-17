@@ -11,6 +11,7 @@
   --color-ink-muted: #7a8294;
   --color-line: #e7e3dc;
   --color-surface: #f0ece6;
+  --bottom-nav-height: 3.75rem;
 }
 
 @theme inline {
@@ -26,6 +27,7 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--background);
+  overflow-x: clip;
 }
 
 body {
@@ -35,6 +37,7 @@ body {
   font-family: var(--font-vazir), Tahoma, sans-serif;
   text-rendering: optimizeLegibility;
   background-color: var(--background);
+  overflow-x: clip;
 }
 
 /* One fixed ambient wash — never tiles / never seams on scroll */
@@ -199,19 +202,4 @@ img {
 .hero-bullet-active {
   width: 1.5rem;
   background: #fff;
-}
-
-/* ─── Product gallery swiper ─── */
-.gallery-thumbs .swiper-slide {
-  opacity: 0.65;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.gallery-thumbs .swiper-slide-thumb-active {
-  opacity: 1;
-}
-
-.gallery-thumbs .swiper-slide-thumb-active .thumb-frame {
-  border-color: var(--color-brand);
 }

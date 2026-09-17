@@ -14,7 +14,7 @@ interface ProductPageViewProps {
 
 export function ProductPageView({ product }: ProductPageViewProps) {
   return (
-    <div>
+    <div className="pb-[4.75rem] sm:pb-0">
       <ProductBreadcrumb product={product} />
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10">

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { categories } from "@/data/products";
 import { useUiStore } from "@/stores/ui-store";
@@ -11,10 +12,18 @@ import { cn } from "@/lib/utils";
 
 export function MobileMenu() {
   const mounted = useHasMounted();
+  const pathname = usePathname();
   const { isMobileMenuOpen, closeMobileMenu } = useUiStore();
 
   useEffect(() => {
-    if (!isMobileMenuOpen) return;
+    closeMobileMenu();
+  }, [pathname, closeMobileMenu]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
 
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -30,23 +39,14 @@ export function MobileMenu() {
     };
   }, [isMobileMenuOpen, closeMobileMenu]);
 
-  if (!mounted) return null;
+  if (!mounted || !isMobileMenuOpen) return null;
 
   return createPortal(
-    <div
-      className={cn(
-        "fixed inset-0 z-[80] lg:hidden",
-        isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none",
-      )}
-      aria-hidden={!isMobileMenuOpen}
-    >
+    <div className="fixed inset-0 z-[80] lg:hidden" role="presentation">
       <button
         type="button"
         aria-label="بستن منو"
-        className={cn(
-          "absolute inset-0 bg-black/45 transition-opacity duration-300",
-          isMobileMenuOpen ? "opacity-100" : "opacity-0",
-        )}
+        className="absolute inset-0 bg-black/45 animate-fade-in"
         onClick={closeMobileMenu}
       />
 
@@ -56,8 +56,8 @@ export function MobileMenu() {
         aria-modal="true"
         aria-label="منوی موبایل"
         className={cn(
-          "absolute inset-y-0 right-0 flex w-[min(86vw,320px)] flex-col bg-white shadow-2xl transition-transform duration-300 ease-out",
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full",
+          "absolute inset-y-0 right-0 flex w-[min(86vw,320px)] flex-col bg-white shadow-2xl",
+          "animate-fade-in",
         )}
       >
         <div className="flex items-center justify-between border-b border-[var(--color-line)] px-5 py-4">
@@ -94,7 +94,7 @@ export function MobileMenu() {
               </Link>
             ))}
             <Link
-              href="/products?tag=amazing"
+              href="/products?amazing=1"
               onClick={closeMobileMenu}
               className="rounded-xl px-3 py-3 text-sm font-medium text-[var(--color-brand)] hover:bg-[var(--color-brand-soft)]"
             >

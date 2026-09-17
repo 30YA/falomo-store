@@ -33,7 +33,7 @@ export function ProductTabs() {
   }, []);
 
   return (
-    <div className="sticky top-[7.5rem] z-30 -mx-4 mb-6 border-y border-[var(--color-line)] bg-white/95 backdrop-blur sm:mx-0 sm:rounded-2xl sm:border">
+    <div className="sticky top-[7.5rem] z-30 mb-6 border-y border-[var(--color-line)] bg-white/95 backdrop-blur sm:rounded-2xl sm:border">
       <div className="flex gap-1 overflow-x-auto px-2 py-2 scrollbar-hide">
         {TABS.map((tab) => (
           <a
