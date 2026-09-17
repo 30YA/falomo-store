@@ -1,9 +1,17 @@
 import { banners, categories, products } from "@/data/products";
+import {
+  applyPlpFilters,
+  buildFacets,
+  type FilterFacets,
+  type PlpFilters,
+} from "@/lib/plp/filters";
+import { enrichProduct } from "@/lib/pdp/enrich";
 import type {
   Banner,
   Category,
   Product,
   ProductCategory,
+  ProductDetail,
   SortOption,
 } from "@/types";
 
@@ -63,56 +71,34 @@ export const catalogRepository = {
       .slice(0, limit);
   },
 
+  getProductDetail(slug: string): ProductDetail | undefined {
+    const product = products.find((p) => p.slug === slug);
+    if (!product) return undefined;
+    return enrichProduct(product);
+  },
+
+  getFacets(): FilterFacets {
+    const names = Object.fromEntries(categories.map((c) => [c.slug, c.name]));
+    return buildFacets(products, names);
+  },
+
+  searchByPlpFilters(filters: PlpFilters): Product[] {
+    return applyPlpFilters(products, filters);
+  },
+
   searchProducts(filters: ProductFilters = {}): Product[] {
-    let result = [...products];
-
-    if (filters.category && filters.category !== "all") {
-      result = result.filter((p) => p.category === filters.category);
-    }
-
-    if (filters.tag) {
-      result = result.filter((p) => p.tags.includes(filters.tag!));
-    }
-
-    if (filters.search?.trim()) {
-      const q = filters.search.trim().toLowerCase();
-      result = result.filter(
-        (p) =>
-          p.title.toLowerCase().includes(q) ||
-          p.brand.toLowerCase().includes(q) ||
-          p.shortTitle.toLowerCase().includes(q),
-      );
-    }
-
-    if (filters.minPrice != null) {
-      result = result.filter((p) => p.price >= filters.minPrice!);
-    }
-
-    if (filters.maxPrice != null) {
-      result = result.filter((p) => p.price <= filters.maxPrice!);
-    }
-
-    if (filters.inStockOnly) {
-      result = result.filter((p) => p.inStock);
-    }
-
-    switch (filters.sort) {
-      case "cheapest":
-        result.sort((a, b) => a.price - b.price);
-        break;
-      case "expensive":
-        result.sort((a, b) => b.price - a.price);
-        break;
-      case "best-selling":
-        result.sort((a, b) => b.reviewCount - a.reviewCount);
-        break;
-      case "newest":
-        result.sort((a, b) => Number(b.isNew) - Number(a.isNew));
-        break;
-      default:
-        break;
-    }
-
-    return result;
+    return applyPlpFilters(products, {
+      category: filters.category,
+      search: filters.search,
+      brands: [],
+      colors: [],
+      sizes: [],
+      features: [],
+      minPrice: filters.minPrice,
+      maxPrice: filters.maxPrice,
+      inStockOnly: filters.inStockOnly,
+      onlyAmazing: filters.tag === "amazing",
+      sort: filters.sort ?? "relevant",
+    });
   },
 };

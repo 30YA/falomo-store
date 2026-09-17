@@ -10,6 +10,7 @@ import { Rating } from "@/components/ui/rating";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cart-store";
 import { useWishlistStore } from "@/stores/wishlist-store";
+import { toast } from "@/components/ui/toaster";
 import { cn, toPersianDigits } from "@/lib/utils";
 
 interface ProductCardProps {
@@ -22,6 +23,22 @@ export function ProductCard({ product, className, priority }: ProductCardProps) 
   const addItem = useCartStore((s) => s.addItem);
   const toggleWishlist = useWishlistStore((s) => s.toggle);
   const isWishlisted = useWishlistStore((s) => s.has(product.id));
+
+  const handleWishlist = () => {
+    const wasWishlisted = isWishlisted;
+    toggleWishlist(product.id);
+    if (wasWishlisted) toast.wishlistRemoved();
+    else toast.wishlistAdded();
+  };
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      colorId: product.colors[0]?.id,
+      size: product.sizes[0],
+    });
+    toast.addedToCart(product.title);
+  };
 
   return (
     <article
@@ -54,7 +71,7 @@ export function ProductCard({ product, className, priority }: ProductCardProps) 
       <button
         type="button"
         aria-label="علاقه‌مندی"
-        onClick={() => toggleWishlist(product.id)}
+        onClick={handleWishlist}
         className={cn(
           "absolute left-2.5 top-2.5 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition hover:scale-105",
           isWishlisted && "text-[var(--color-brand)]",
@@ -83,13 +100,7 @@ export function ProductCard({ product, className, priority }: ProductCardProps) 
           <Button
             size="icon"
             aria-label="افزودن به سبد"
-            onClick={() =>
-              addItem({
-                productId: product.id,
-                colorId: product.colors[0]?.id,
-                size: product.sizes[0],
-              })
-            }
+            onClick={handleAddToCart}
             className="shrink-0"
           >
             <ShoppingBag className="h-4 w-4" />

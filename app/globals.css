@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f4f1;
+  --background: #f7f5f2;
   --foreground: #1a1d23;
-  --color-brand: #ef4056;
-  --color-brand-dark: #d62f45;
-  --color-brand-soft: #ffe8eb;
+  --color-brand: #f97316;
+  --color-brand-dark: #ea580c;
+  --color-brand-soft: #fff4eb;
   --color-ink: #1a1d23;
   --color-ink-soft: #3f4654;
   --color-ink-muted: #7a8294;
@@ -25,16 +25,37 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--background);
 }
 
 body {
-  background:
-    radial-gradient(ellipse 80% 50% at 100% -10%, rgba(239, 64, 86, 0.08), transparent),
-    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(61, 90, 128, 0.07), transparent),
-    var(--background);
+  position: relative;
+  min-height: 100%;
   color: var(--foreground);
   font-family: var(--font-vazir), Tahoma, sans-serif;
   text-rendering: optimizeLegibility;
+  background-color: var(--background);
+}
+
+/* One fixed ambient wash — never tiles / never seams on scroll */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      120% 80% at 100% -5%,
+      rgba(249, 115, 22, 0.11),
+      transparent 52%
+    ),
+    radial-gradient(
+      100% 70% at -5% 105%,
+      rgba(61, 90, 128, 0.07),
+      transparent 50%
+    ),
+    var(--background);
 }
 
 a {
@@ -47,7 +68,7 @@ img {
 }
 
 ::selection {
-  background: rgba(239, 64, 86, 0.18);
+  background: rgba(249, 115, 22, 0.18);
 }
 
 .scrollbar-hide {
@@ -89,4 +110,108 @@ img {
 
 .font-display {
   letter-spacing: -0.03em;
+}
+
+/* ─── Hero Swiper ─── */
+.hero-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  clip-path: inset(0 round 1.25rem);
+  -webkit-clip-path: inset(0 round 1.25rem);
+  transform: translateZ(0);
+  background: var(--color-surface);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+@media (min-width: 640px) {
+  .hero-frame {
+    border-radius: 1.75rem;
+    clip-path: inset(0 round 1.75rem);
+    -webkit-clip-path: inset(0 round 1.75rem);
+  }
+}
+
+.hero-slide-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+@media (min-width: 640px) {
+  .hero-slide-media {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+.hero-swiper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important;
+  border-radius: inherit;
+}
+
+.hero-swiper .swiper-wrapper {
+  overflow: hidden !important;
+  border-radius: inherit;
+}
+
+.hero-swiper .swiper-slide {
+  height: auto !important;
+  overflow: hidden !important;
+  border-radius: inherit;
+}
+
+.hero-swiper .swiper-slide-active,
+.hero-swiper .swiper-slide-duplicate-active {
+  border-radius: inherit;
+}
+
+.hero-swiper .swiper-pagination {
+  position: absolute !important;
+  inset-inline: 0;
+  bottom: 0.85rem !important;
+  top: auto !important;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0 !important;
+  width: 100%;
+  pointer-events: none;
+}
+
+.hero-bullet {
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.25s ease;
+}
+
+.hero-bullet-active {
+  width: 1.5rem;
+  background: #fff;
+}
+
+/* ─── Product gallery swiper ─── */
+.gallery-thumbs .swiper-slide {
+  opacity: 0.65;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.gallery-thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.gallery-thumbs .swiper-slide-thumb-active .thumb-frame {
+  border-color: var(--color-brand);
 }

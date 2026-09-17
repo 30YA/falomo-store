@@ -3,6 +3,7 @@ import { Vazirmatn } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { BottomNav } from "@/components/layout/bottom-nav";
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 const vazir = Vazirmatn({
@@ -26,9 +27,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="fa" dir="rtl" className={`${vazir.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
         <Header />
-        <main className="flex-1 pb-4">{children}</main>
+        <main className="flex-1 pb-20 lg:pb-4">{children}</main>
         <Footer />
         <BottomNav />
+        <Toaster />
       </body>
     </html>
   );

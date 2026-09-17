@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
-import { ProductDetails } from "@/components/product/product-details";
+import { ProductPageView } from "@/components/pdp/product-page-view";
 import { ProductSection } from "@/components/home/product-section";
 import { catalogRepository } from "@/lib/catalog";
 
@@ -27,18 +27,22 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = catalogRepository.getProductBySlug(slug);
+  const product = catalogRepository.getProductDetail(slug);
   if (!product) notFound();
 
-  const related = catalogRepository.getRelatedProducts(product);
+  const related = catalogRepository.getRelatedProducts(product, 8);
 
   return (
     <>
-      <Container className="py-6">
-        <ProductDetails product={product} />
+      <Container className="py-5 sm:py-6">
+        <ProductPageView product={product} />
       </Container>
       {related.length > 0 && (
-        <ProductSection title="محصولات مرتبط" products={related} href="/products" />
+        <ProductSection
+          title="کالاهای مشابه"
+          products={related}
+          href={`/products?category=${product.category}`}
+        />
       )}
     </>
   );

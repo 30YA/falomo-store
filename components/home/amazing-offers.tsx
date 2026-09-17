@@ -1,76 +1,96 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation } from "swiper/modules";
+import type { NavigationOptions } from "swiper/types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/types";
 import { ProductCard } from "@/components/product/product-card";
 import { Container } from "@/components/ui/container";
-import { toPersianDigits } from "@/lib/utils";
-import { useHasMounted } from "@/lib/hooks/use-has-mounted";
+import { CountdownTimer } from "@/components/ui/countdown-timer";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
 
 interface AmazingOffersProps {
   products: Product[];
 }
 
-function useCountdown(hours = 8) {
-  const [remaining, setRemaining] = useState(hours * 3600);
-  const mounted = useHasMounted();
-
-  useEffect(() => {
-    if (!mounted) return;
-    const id = setInterval(() => {
-      setRemaining((r) => (r > 0 ? r - 1 : hours * 3600));
-    }, 1000);
-    return () => clearInterval(id);
-  }, [hours, mounted]);
-
-  const h = Math.floor(remaining / 3600);
-  const m = Math.floor((remaining % 3600) / 60);
-  const s = remaining % 60;
-
-  return {
-    h: String(h).padStart(2, "0"),
-    m: String(m).padStart(2, "0"),
-    s: String(s).padStart(2, "0"),
-  };
-}
-
 export function AmazingOffers({ products }: AmazingOffersProps) {
-  const time = useCountdown(6);
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
 
   return (
     <section className="py-4 sm:py-6">
       <Container>
-        <div className="overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#ef4056_0%,#c81e3a_55%,#9f1239_100%)] p-3 sm:rounded-3xl sm:p-5">
+        <div className="overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#f97316_0%,#ea580c_55%,#c2410c_100%)] p-3 sm:rounded-3xl sm:p-5">
           <div className="mb-3 flex items-center justify-between gap-3 text-white sm:mb-4">
-            <div className="flex items-center gap-3">
-              <h2 className="text-base font-bold sm:text-xl">پیشنهاد شگفت‌انگیز</h2>
-              <div className="flex items-center gap-1 font-mono text-sm" dir="ltr">
-                {[time.h, time.m, time.s].map((part, i) => (
-                  <span key={i} className="flex items-center gap-1">
-                    {i > 0 && <span className="opacity-70">:</span>}
-                    <span className="rounded-md bg-white/15 px-1.5 py-0.5 backdrop-blur">
-                      {toPersianDigits(part)}
-                    </span>
-                  </span>
-                ))}
-              </div>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <h2 className="text-base font-bold sm:text-xl">
+                پیشنهاد شگفت‌انگیز
+              </h2>
+              <CountdownTimer cycleHours={6} />
             </div>
-            <Link
-              href="/products?tag=amazing"
-              className="text-sm text-white/90 transition hover:text-white"
-            >
-              مشاهده همه
-            </Link>
+            <div className="flex items-center gap-2">
+              <div className="hidden items-center gap-1 sm:flex">
+                <button
+                  ref={prevRef}
+                  type="button"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 transition hover:bg-white/25"
+                  aria-label="قبلی"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+                <button
+                  ref={nextRef}
+                  type="button"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 transition hover:bg-white/25"
+                  aria-label="بعدی"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+              </div>
+              <Link
+                href="/products?tag=amazing"
+                className="text-sm text-white/90 transition hover:text-white"
+              >
+                مشاهده همه
+              </Link>
+            </div>
           </div>
 
-          <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide sm:grid sm:grid-cols-4 sm:gap-4 sm:overflow-visible">
-            {products.slice(0, 4).map((product) => (
-              <div key={product.id} className="w-[70vw] max-w-[240px] shrink-0 sm:w-auto sm:max-w-none">
-                <ProductCard product={product} />
-              </div>
+          <Swiper
+            modules={[FreeMode, Navigation]}
+            dir="rtl"
+            freeMode
+            spaceBetween={12}
+            slidesPerView={1.35}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              const navigation = swiper.params.navigation as NavigationOptions;
+              navigation.prevEl = prevRef.current;
+              navigation.nextEl = nextRef.current;
+            }}
+            breakpoints={{
+              480: { slidesPerView: 1.8, spaceBetween: 12 },
+              640: { slidesPerView: 2.4, spaceBetween: 14 },
+              768: { slidesPerView: 3.1, spaceBetween: 14 },
+              1024: { slidesPerView: 4, spaceBetween: 16 },
+            }}
+            className="amazing-swiper"
+          >
+            {products.map((product) => (
+              <SwiperSlide key={product.id} className="!h-auto">
+                <ProductCard product={product} className="h-full" />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </Container>
     </section>

@@ -1,51 +1,38 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
-import { ProductGrid } from "@/components/product/product-grid";
-import { ProductsToolbar } from "@/components/product/products-toolbar";
-import { catalogRepository } from "@/lib/catalog";
-import type { ProductCategory, SortOption } from "@/types";
+import { ProductsListing } from "@/components/plp/products-listing";
 
-interface ProductsPageProps {
-  searchParams: Promise<{
-    category?: string;
-    tag?: string;
-    search?: string;
-    sort?: SortOption;
-  }>;
-}
+export const metadata: Metadata = {
+  title: "محصولات",
+  description: "لیست کامل کالای خواب فالومو با فیلتر برند، قیمت، رنگ و سایز",
+};
 
-async function ProductsContent({
-  searchParams,
-}: {
-  searchParams: ProductsPageProps["searchParams"];
-}) {
-  const params = await searchParams;
-  const products = catalogRepository.searchProducts({
-    category: (params.category as ProductCategory | "all") || "all",
-    tag: params.tag,
-    search: params.search,
-    sort: params.sort || "relevant",
-  });
-
+function ProductsFallback() {
   return (
-    <>
-      <ProductsToolbar resultCount={products.length} />
-      <ProductGrid products={products} />
-    </>
+    <div className="space-y-4 py-6">
+      <div className="h-10 w-48 animate-pulse rounded-xl bg-[var(--color-surface)]" />
+      <div className="h-12 animate-pulse rounded-2xl bg-[var(--color-surface)]" />
+      <div className="grid gap-5 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="hidden h-[32rem] animate-pulse rounded-2xl bg-[var(--color-surface)] lg:block" />
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className="aspect-[3/4] animate-pulse rounded-2xl bg-[var(--color-surface)]"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
-export default function ProductsPage({ searchParams }: ProductsPageProps) {
+export default function ProductsPage() {
   return (
-    <Container className="py-6">
-      <Suspense
-        fallback={
-          <div className="py-20 text-center text-[var(--color-ink-muted)]">
-            در حال بارگذاری...
-          </div>
-        }
-      >
-        <ProductsContent searchParams={searchParams} />
+    <Container className="py-5 sm:py-6">
+      <Suspense fallback={<ProductsFallback />}>
+        <ProductsListing />
       </Suspense>
     </Container>
   );
