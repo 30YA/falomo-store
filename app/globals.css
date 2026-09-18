@@ -30,10 +30,9 @@ html {
   scroll-behavior: smooth;
   background-color: var(--background);
   overflow-x: clip;
-  /* Keep in-page anchors / sticky targets clear of the sticky header */
-  scroll-padding-top: var(--header-offset);
 }
 
+/* Only section anchors need header clearance — not document scroll-to-top */
 main [id] {
   scroll-margin-top: var(--header-offset);
 }

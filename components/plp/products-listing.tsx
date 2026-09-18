@@ -2,8 +2,9 @@
 
 import { useCallback, useMemo, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { LayoutGrid, ListFilter, SlidersHorizontal } from "lucide-react";
+import { LayoutGrid, List, SlidersHorizontal } from "lucide-react";
 import { ProductGrid } from "@/components/product/product-grid";
+import type { ProductCardLayout } from "@/components/product/product-card";
 import { FilterSidebar } from "@/components/plp/filter-sidebar";
 import { ActiveFilterChips } from "@/components/plp/active-filter-chips";
 import { MobileFilterDrawer } from "@/components/plp/mobile-filter-drawer";
@@ -35,7 +36,7 @@ export function ProductsListing() {
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
   const [filterOpen, setFilterOpen] = useState(false);
-  const [dense, setDense] = useState(false);
+  const [view, setView] = useState<ProductCardLayout>("grid");
 
   const facets = useMemo(() => catalogRepository.getFacets(), []);
   const allProducts = useMemo(() => catalogRepository.getAllProducts(), []);
@@ -102,19 +103,38 @@ export function ProductsListing() {
             )}
           </button>
           <MobileSortSelect filters={filters} onChange={setSort} />
-          <button
-            type="button"
-            onClick={() => setDense((v) => !v)}
-            className="hidden h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-line)] bg-white lg:flex"
-            aria-label="تغییر نمایش"
-            title="تغییر تراکم گرید"
-          >
-            {dense ? (
-              <ListFilter className="h-4 w-4" />
-            ) : (
+          <div className="flex h-10 overflow-hidden rounded-xl border border-[var(--color-line)] bg-white">
+            <button
+              type="button"
+              onClick={() => setView("grid")}
+              className={cn(
+                "flex h-full w-10 items-center justify-center transition",
+                view === "grid"
+                  ? "bg-[var(--color-brand-soft)] text-[var(--color-brand)]"
+                  : "text-[var(--color-ink-muted)] hover:bg-black/5",
+              )}
+              aria-label="نمایش خانه‌ای"
+              aria-pressed={view === "grid"}
+              title="نمایش خانه‌ای"
+            >
               <LayoutGrid className="h-4 w-4" />
-            )}
-          </button>
+            </button>
+            <button
+              type="button"
+              onClick={() => setView("list")}
+              className={cn(
+                "flex h-full w-10 items-center justify-center border-r border-[var(--color-line)] transition",
+                view === "list"
+                  ? "bg-[var(--color-brand-soft)] text-[var(--color-brand)]"
+                  : "text-[var(--color-ink-muted)] hover:bg-black/5",
+              )}
+              aria-label="نمایش لیستی"
+              aria-pressed={view === "list"}
+              title="نمایش لیستی"
+            >
+              <List className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -144,14 +164,7 @@ export function ProductsListing() {
         />
 
         <div className="min-w-0">
-          <ProductGrid
-            products={products}
-            className={cn(
-              dense
-                ? "md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4"
-                : "md:grid-cols-3 lg:grid-cols-3",
-            )}
-          />
+          <ProductGrid products={products} layout={view} />
         </div>
       </div>
 

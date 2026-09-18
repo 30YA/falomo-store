@@ -99,6 +99,24 @@ export function MobileMenu() {
             >
               پیشنهادهای شگفت‌انگیز
             </Link>
+            <div className="my-2 border-t border-[var(--color-line)]" />
+            {[
+              { href: "/about", label: "درباره ما" },
+              { href: "/contact", label: "ارتباط با ما" },
+              { href: "/faq", label: "سوالات متداول" },
+              { href: "/shipping", label: "ارسال و بازگشت" },
+              { href: "/terms", label: "قوانین و مقررات" },
+              { href: "/privacy", label: "حریم خصوصی" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMobileMenu}
+                className="rounded-xl px-3 py-3 text-sm text-[var(--color-ink-soft)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </nav>
       </aside>

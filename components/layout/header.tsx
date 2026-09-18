@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { Heart, Menu, ShoppingCart } from "lucide-react";
 import { BrandLogo } from "@/components/brand/brand-logo";
+import { HomeLink } from "@/components/brand/home-link";
 import { Container } from "@/components/ui/container";
+import { DesktopNav } from "@/components/layout/desktop-nav";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { SearchBox } from "@/components/search/search-box";
 import { useCartStore } from "@/stores/cart-store";
 import { useWishlistStore } from "@/stores/wishlist-store";
 import { useUiStore } from "@/stores/ui-store";
-import { categories } from "@/data/products";
 import { toPersianDigits } from "@/lib/utils";
 import { useHasMounted } from "@/lib/hooks/use-has-mounted";
 
@@ -72,8 +73,7 @@ export function Header() {
             <Menu className="h-5 w-5" strokeWidth={2.25} />
           </button>
 
-          <Link
-            href="/"
+          <HomeLink
             className="flex shrink-0 items-center"
             aria-label="فالومو — صفحه اصلی"
           >
@@ -82,7 +82,7 @@ export function Header() {
               priority
               className="h-10 sm:h-11"
             />
-          </Link>
+          </HomeLink>
 
           <SearchBox className="mx-2 hidden min-w-0 max-w-sm flex-1 basis-0 md:block lg:mx-4" />
 
@@ -116,29 +116,7 @@ export function Header() {
 
         <SearchBox className="mt-3 md:hidden" />
 
-        <nav className="mt-3 hidden items-center gap-1 overflow-x-auto lg:flex">
-          <Link
-            href="/categories"
-            className="rounded-lg px-3 py-1.5 text-sm font-medium text-[var(--color-ink)] hover:bg-black/5"
-          >
-            دسته‌بندی‌ها
-          </Link>
-          {categories.map((cat) => (
-            <Link
-              key={cat.id}
-              href={`/products?category=${cat.slug}`}
-              className="rounded-lg px-3 py-1.5 text-sm text-[var(--color-ink-soft)] hover:bg-black/5 hover:text-[var(--color-ink)]"
-            >
-              {cat.name}
-            </Link>
-          ))}
-          <Link
-            href="/products?amazing=1"
-            className="rounded-lg px-3 py-1.5 text-sm font-medium text-[var(--color-brand)] hover:bg-[var(--color-brand-soft)]"
-          >
-            شگفت‌انگیزها
-          </Link>
-        </nav>
+        <DesktopNav />
       </Container>
 
       <MobileMenu />

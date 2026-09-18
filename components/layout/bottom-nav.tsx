@@ -41,6 +41,11 @@ export function BottomNav() {
             <li key={href} className="flex-1">
               <Link
                 href={href}
+                onClick={() => {
+                  if (href === "/") {
+                    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+                  }
+                }}
                 className={cn(
                   "relative flex h-full flex-col items-center justify-center gap-0.5 rounded-xl px-1 text-[10px] transition",
                   active
