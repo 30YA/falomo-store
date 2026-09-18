@@ -35,7 +35,8 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
   const [qty, setQty] = useState(1);
   const addItem = useCartStore((s) => s.addItem);
   const toggleWishlist = useWishlistStore((s) => s.toggle);
-  const isWishlisted = useWishlistStore((s) => s.has(product.id));
+  const storedWishlisted = useWishlistStore((s) => s.has(product.id));
+  const isWishlisted = mounted && storedWishlisted;
 
   const selectedColor = useMemo(
     () => product.colors.find((c) => c.id === colorId),

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
 import { categories } from "@/data/products";
 
@@ -7,7 +8,9 @@ export function Footer() {
     <footer className="mt-auto border-t border-[var(--color-line)] bg-white pb-24 lg:pb-0">
       <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-3">
-          <p className="text-2xl font-black text-[var(--color-brand)]">فالومو</p>
+          <Link href="/" aria-label="فالومو" className="inline-block">
+            <BrandLogo variant="full" className="h-auto w-40 sm:w-48" />
+          </Link>
           <p className="text-sm leading-7 text-[var(--color-ink-muted)]">
             فروشگاه تخصصی کالای خواب؛ روتختی، ملحفه، بالش، تشک و پتو با تمرکز روی
             کیفیت خواب و زیبایی اتاق.

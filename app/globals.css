@@ -12,6 +12,8 @@
   --color-line: #e7e3dc;
   --color-surface: #f0ece6;
   --bottom-nav-height: 3.75rem;
+  /* Fallback until Header measures itself (promo + bar + categories) */
+  --header-offset: 9.5rem;
 }
 
 @theme inline {
@@ -28,6 +30,12 @@ html {
   scroll-behavior: smooth;
   background-color: var(--background);
   overflow-x: clip;
+  /* Keep in-page anchors / sticky targets clear of the sticky header */
+  scroll-padding-top: var(--header-offset);
+}
+
+main [id] {
+  scroll-margin-top: var(--header-offset);
 }
 
 body {

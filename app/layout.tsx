@@ -20,6 +20,28 @@ export const metadata: Metadata = {
   },
   description:
     "خرید آنلاین روتختی، ملحفه، بالش، تشک و پتو با بهترین کیفیت و ارسال سریع",
+  applicationName: "فالومو",
+  openGraph: {
+    title: "فالومو | فروشگاه تخصصی کالای خواب",
+    description: "آرامش، از خانه شروع می‌شود",
+    siteName: "فالومو",
+    locale: "fa_IR",
+    type: "website",
+    images: [
+      {
+        url: "/brand/logo.png",
+        width: 1024,
+        height: 682,
+        alt: "لوگوی فالومو",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "فالومو | فروشگاه تخصصی کالای خواب",
+    description: "آرامش، از خانه شروع می‌شود",
+    images: ["/brand/app-icon.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

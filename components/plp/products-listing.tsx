@@ -140,7 +140,7 @@ export function ProductsListing() {
           filters={filters}
           onChange={commit}
           onClear={clearAll}
-          className="sticky top-28 hidden self-start lg:block"
+          className="sticky top-[var(--header-offset)] hidden self-start lg:block"
         />
 
         <div className="min-w-0">

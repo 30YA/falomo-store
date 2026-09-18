@@ -1,17 +1,27 @@
 "use client";
 
+import Link from "next/link";
 import { useWishlistStore } from "@/stores/wishlist-store";
 import { catalogRepository } from "@/lib/catalog";
 import { ProductGrid } from "@/components/product/product-grid";
-import Link from "next/link";
+import { useHasMounted } from "@/lib/hooks/use-has-mounted";
 
 export function WishlistView() {
+  const mounted = useHasMounted();
   const productIds = useWishlistStore((s) => s.productIds);
-  const products = productIds
+  const products = (mounted ? productIds : [])
     .map((id) => catalogRepository.getProductById(id))
     .filter(Boolean) as NonNullable<
     ReturnType<typeof catalogRepository.getProductById>
   >[];
+
+  if (!mounted) {
+    return (
+      <div className="rounded-2xl border border-[var(--color-line)] bg-white px-6 py-16 text-center">
+        <p className="text-[var(--color-ink-muted)]">در حال بارگذاری...</p>
+      </div>
+    );
+  }
 
   if (products.length === 0) {
     return (

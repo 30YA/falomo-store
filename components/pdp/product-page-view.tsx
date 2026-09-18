@@ -18,7 +18,7 @@ export function ProductPageView({ product }: ProductPageViewProps) {
       <ProductBreadcrumb product={product} />
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10">
-        <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="lg:sticky lg:top-[var(--header-offset)] lg:self-start">
           <ProductGallery images={product.images} alt={product.title} />
         </div>
         <ProductBuyBox product={product} />

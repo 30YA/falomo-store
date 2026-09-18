@@ -39,7 +39,7 @@ export function ProductTabs() {
         // Mobile: never sticky — avoids covering the fixed buy bar
         "relative z-0",
         // Desktop: sticky under header is fine
-        "sm:sticky sm:top-28 sm:z-10 sm:rounded-2xl sm:border sm:bg-white/95 sm:backdrop-blur",
+        "sm:sticky sm:top-[var(--header-offset)] sm:z-10 sm:rounded-2xl sm:border sm:bg-white/95 sm:backdrop-blur",
       )}
     >
       <div className="flex gap-1 overflow-x-auto px-2 py-2 scrollbar-hide">

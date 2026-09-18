@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { categories } from "@/data/products";
 import { useUiStore } from "@/stores/ui-store";
 import { useHasMounted } from "@/lib/hooks/use-has-mounted";
@@ -61,9 +62,7 @@ export function MobileMenu() {
         )}
       >
         <div className="flex items-center justify-between border-b border-[var(--color-line)] px-5 py-4">
-          <span className="text-xl font-black text-[var(--color-brand)]">
-            فالومو
-          </span>
+          <BrandLogo variant="logotype" className="h-10" />
           <button
             type="button"
             onClick={closeMobileMenu}

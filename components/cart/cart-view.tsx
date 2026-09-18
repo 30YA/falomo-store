@@ -6,12 +6,14 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { useCartStore } from "@/stores/cart-store";
 import { catalogRepository } from "@/lib/catalog";
 import { Button } from "@/components/ui/button";
+import { useHasMounted } from "@/lib/hooks/use-has-mounted";
 import { formatPrice, toPersianDigits } from "@/lib/utils";
 
 export function CartView() {
+  const mounted = useHasMounted();
   const { items, updateQuantity, removeItem, clearCart } = useCartStore();
 
-  const lines = items.flatMap((item) => {
+  const lines = (mounted ? items : []).flatMap((item) => {
     const product = catalogRepository.getProductById(item.productId);
     if (!product) return [];
     const color = product.colors.find((c) => c.id === item.colorId);
@@ -22,6 +24,14 @@ export function CartView() {
     (sum, line) => sum + line.product.price * line.item.quantity,
     0,
   );
+
+  if (!mounted) {
+    return (
+      <div className="rounded-2xl border border-[var(--color-line)] bg-white px-6 py-16 text-center">
+        <p className="text-[var(--color-ink-muted)]">در حال بارگذاری...</p>
+      </div>
+    );
+  }
 
   if (lines.length === 0) {
     return (
@@ -136,7 +146,7 @@ export function CartView() {
         ))}
       </div>
 
-      <aside className="h-fit rounded-2xl border border-[var(--color-line)] bg-white p-5 lg:sticky lg:top-28">
+      <aside className="h-fit rounded-2xl border border-[var(--color-line)] bg-white p-5 lg:sticky lg:top-[var(--header-offset)]">
         <h2 className="mb-4 font-bold">خلاصه سفارش</h2>
         <div className="mb-4 flex items-center justify-between text-sm">
           <span className="text-[var(--color-ink-muted)]">جمع کل</span>

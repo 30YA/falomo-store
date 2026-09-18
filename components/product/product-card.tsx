@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cart-store";
 import { useWishlistStore } from "@/stores/wishlist-store";
 import { toast } from "@/components/ui/toaster";
+import { useHasMounted } from "@/lib/hooks/use-has-mounted";
 import { cn, toPersianDigits } from "@/lib/utils";
 
 interface ProductCardProps {
@@ -20,9 +21,11 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, className, priority }: ProductCardProps) {
+  const mounted = useHasMounted();
   const addItem = useCartStore((s) => s.addItem);
   const toggleWishlist = useWishlistStore((s) => s.toggle);
-  const isWishlisted = useWishlistStore((s) => s.has(product.id));
+  const storedWishlisted = useWishlistStore((s) => s.has(product.id));
+  const isWishlisted = mounted && storedWishlisted;
 
   const handleWishlist = () => {
     const wasWishlisted = isWishlisted;
