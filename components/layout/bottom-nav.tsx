@@ -30,7 +30,7 @@ export function BottomNav() {
   const shownCart = mounted ? cartCount : 0;
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-line)] bg-white/95 backdrop-blur lg:hidden pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--color-line)] bg-white/95 backdrop-blur lg:hidden pb-[env(safe-area-inset-bottom)]">
       <ul className="mx-auto flex h-[var(--bottom-nav-height)] max-w-lg items-center justify-between px-2">
         {items.map(({ href, label, icon: Icon }) => {
           const active =

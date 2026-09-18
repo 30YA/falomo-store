@@ -12,6 +12,7 @@ import {
   Truck,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import type { ProductDetail } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import { Rating } from "@/components/ui/rating";
 import { toast } from "@/components/ui/toaster";
 import { useCartStore } from "@/stores/cart-store";
 import { useWishlistStore } from "@/stores/wishlist-store";
+import { useHasMounted } from "@/lib/hooks/use-has-mounted";
 import { cn, toPersianDigits } from "@/lib/utils";
 
 interface ProductBuyBoxProps {
@@ -27,6 +29,7 @@ interface ProductBuyBoxProps {
 }
 
 export function ProductBuyBox({ product }: ProductBuyBoxProps) {
+  const mounted = useHasMounted();
   const [colorId, setColorId] = useState(product.colors[0]?.id);
   const [size, setSize] = useState(product.sizes[0]);
   const [qty, setQty] = useState(1);
@@ -225,23 +228,31 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
         />
       </div>
 
-      {/* Mobile fixed CTA — flush above bottom navigation */}
-      <div
-        className="fixed inset-x-0 z-30 border-t border-[var(--color-line)] bg-white/95 px-4 py-3 shadow-[0_-8px_24px_-12px_rgba(15,23,42,0.2)] backdrop-blur sm:hidden"
-        style={{
-          bottom:
-            "calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px))",
-        }}
-      >
-        <BuyActions
-          qty={qty}
-          setQty={setQty}
-          onAdd={handleAdd}
-          onWishlist={handleWishlist}
-          inStock={product.inStock}
-          isWishlisted={isWishlisted}
-        />
-      </div>
+      {/*
+        Mobile CTA is portaled to <body> with a high z-index so page sticky
+        content (tabs, etc.) can never paint over it.
+      */}
+      {mounted &&
+        createPortal(
+          <div
+            data-pdp-mobile-cta=""
+            className="fixed inset-x-0 z-[60] border-t border-[var(--color-line)] bg-white px-4 py-3 shadow-[0_-8px_24px_-12px_rgba(15,23,42,0.25)] sm:hidden"
+            style={{
+              bottom:
+                "calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px))",
+            }}
+          >
+            <BuyActions
+              qty={qty}
+              setQty={setQty}
+              onAdd={handleAdd}
+              onWishlist={handleWishlist}
+              inStock={product.inStock}
+              isWishlisted={isWishlisted}
+            />
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

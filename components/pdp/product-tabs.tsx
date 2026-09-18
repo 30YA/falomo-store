@@ -33,13 +33,28 @@ export function ProductTabs() {
   }, []);
 
   return (
-    <div className="sticky top-[7.5rem] z-30 mb-6 border-y border-[var(--color-line)] bg-white/95 backdrop-blur sm:rounded-2xl sm:border">
+    <div
+      className={cn(
+        "mb-6 border-y border-[var(--color-line)] bg-white",
+        // Mobile: never sticky — avoids covering the fixed buy bar
+        "relative z-0",
+        // Desktop: sticky under header is fine
+        "sm:sticky sm:top-28 sm:z-10 sm:rounded-2xl sm:border sm:bg-white/95 sm:backdrop-blur",
+      )}
+    >
       <div className="flex gap-1 overflow-x-auto px-2 py-2 scrollbar-hide">
         {TABS.map((tab) => (
           <a
             key={tab.id}
             href={`#${tab.id}`}
-            onClick={() => setActive(tab.id)}
+            onClick={(event) => {
+              event.preventDefault();
+              setActive(tab.id);
+              document.getElementById(tab.id)?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
             className={cn(
               "shrink-0 rounded-xl px-4 py-2 text-sm transition",
               active === tab.id
