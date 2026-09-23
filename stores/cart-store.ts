@@ -81,6 +81,6 @@ export const useCartStore = create<CartState>()(
       getTotalCount: () =>
         get().items.reduce((sum, item) => sum + item.quantity, 0),
     }),
-    { name: "falomo-cart" },
+    { name: "royan-cart" },
   ),
 );

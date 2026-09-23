@@ -72,7 +72,7 @@ export function ProductCard({
             priority={priority}
           />
           {(product.isAmazingOffer || product.isNew) && (
-            <div className="absolute right-1.5 top-1.5">
+            <div className="absolute right-2.5 top-2.5">
               {product.isAmazingOffer ? (
                 <Badge>شگفت‌انگیز</Badge>
               ) : (
@@ -162,7 +162,7 @@ export function ProductCard({
             className="object-cover transition duration-500 group-hover:scale-105"
             priority={priority}
           />
-          <div className="absolute inset-x-0 top-0 flex items-start justify-between p-2.5">
+          <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3.5">
             <div className="flex flex-col gap-1">
               {product.isAmazingOffer && <Badge>شگفت‌انگیز</Badge>}
               {product.isNew && !product.isAmazingOffer && (

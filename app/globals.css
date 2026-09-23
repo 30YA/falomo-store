@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f5f2;
-  --foreground: #1a1d23;
-  --color-brand: #f97316;
-  --color-brand-dark: #ea580c;
-  --color-brand-soft: #fff4eb;
-  --color-ink: #1a1d23;
-  --color-ink-soft: #3f4654;
-  --color-ink-muted: #7a8294;
-  --color-line: #e7e3dc;
-  --color-surface: #f0ece6;
+  --background: #f6f7f8;
+  --foreground: #243044;
+  --color-pastel: #c9e6f6;
+  --color-pastel-deep: #9fceea;
+  --color-brand: #246894;
+  --color-brand-dark: #1c5678;
+  --color-brand-soft: #d5eaf6;
+  --color-ink: #243044;
+  --color-ink-soft: #4a5c6e;
+  --color-ink-muted: #7d8d9c;
+  --color-line: #e6e8ec;
+  --color-surface: #ffffff;
   --bottom-nav-height: 3.75rem;
   /* Fallback until Header measures itself (promo + bar + categories) */
   --header-offset: 9.5rem;
@@ -28,6 +30,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
   background-color: var(--background);
   overflow-x: clip;
 }
@@ -54,18 +57,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(
-      120% 80% at 100% -5%,
-      rgba(249, 115, 22, 0.11),
-      transparent 52%
-    ),
-    radial-gradient(
-      100% 70% at -5% 105%,
-      rgba(61, 90, 128, 0.07),
-      transparent 50%
-    ),
-    var(--background);
+  background: var(--background);
 }
 
 a {
@@ -78,7 +70,7 @@ img {
 }
 
 ::selection {
-  background: rgba(249, 115, 22, 0.18);
+  background: rgba(183, 223, 243, 0.85);
 }
 
 .scrollbar-hide {

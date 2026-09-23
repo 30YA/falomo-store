@@ -1,10 +1,10 @@
-# Falomo Store
+# Royan Store
 
-**Falomo** (فالومو) is a Persian RTL e-commerce front-end for bedding and sleep products — duvet covers, sheets, pillows, mattresses, and blankets.
+**Royan** (رویان) is a Persian RTL e-commerce front-end for bedding and sleep products — duvet covers, sheets, pillows, mattresses, and blankets — from Iranian and foreign brands. Royan is the only seller and supplier.
 
-It delivers a Digikala-inspired shopping experience with a warm orange brand identity, mock catalog data (no backend), and a modular architecture that is easy to extend toward a real API.
+It delivers a Digikala-inspired shopping experience with a white canvas and pastel blue accents, mock catalog data (no backend), and a modular architecture that is easy to extend toward a real API.
 
-> **Tagline:** آرامیش، از خانه شروع می‌شود — *Comfort begins at home.*
+> **Tagline:** خواب آرام، از رویان — *Restful sleep, from Royan.*
 
 ---
 
@@ -86,14 +86,14 @@ ProductsListing  ──►  FilterSidebar / chips / ProductGrid
 
 - `stores/cart-store.ts` — line items (product, color, size, qty)
 - `stores/wishlist-store.ts` — product IDs  
-Both use Zustand `persist` → `localStorage` (`falomo-cart` / `falomo-wishlist`).
+Both use Zustand `persist` → `localStorage` (`royan-cart` / `royan-wishlist`).
 
 ---
 
 ## Project structure
 
 ```text
-falomo-store/
+royan-store/
 ├── app/                      # App Router pages
 │   ├── page.tsx              # Home
 │   ├── products/             # PLP + PDP [slug]
@@ -143,7 +143,7 @@ falomo-store/
 /products?category=duvet-cover
 /products?amazing=1
 /products?search=ملحفه&sort=cheapest
-/products?brand=falomo&inStock=1
+/products?brand=متین&inStock=1
 ```
 
 ---
@@ -181,15 +181,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | Token | Role |
 |-------|------|
-| `--color-brand` `#f97316` | Primary orange (CTAs, accents) |
-| `--color-brand-soft` | Soft highlight backgrounds |
+| `--background` `#e8f4fa` | Soft pastel page canvas |
+| `--color-brand` `#2a74a8` | Sky blue for buttons and links |
+| `--color-brand-soft` `#eaf6fc` | Pastel blue highlights |
+| `--color-pastel` `#d7eefb` | Soft blue washes |
+| `--color-pastel-deep` `#b7dff3` | Logo tile |
 | `--color-ink` / `--color-ink-muted` | Text hierarchy |
-| `--color-line` / `--color-surface` | Borders & surfaces |
 | `--header-offset` | Sticky offset (measured from header) |
 | `--bottom-nav-height` | Mobile bottom bar spacing |
 
 - Direction: **`dir="rtl"`** / `lang="fa"`
-- Assets: `public/brand/` (logotype, mark, favicons)
+- Assets: `app/icon.svg`, `app/apple-icon.tsx`, `public/brand/mark.svg`
 
 ---
 
@@ -229,7 +231,7 @@ Private / educational project — update this section if you publish under an op
 ---
 
 <p align="center">
-  <strong>Falomo</strong> · Bedding commerce, built with Next.js
+  <strong>Royan</strong> · Bedding commerce, built with Next.js
   <br />
   <sub>Made for learning, designed for extension</sub>
 </p>

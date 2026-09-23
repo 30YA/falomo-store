@@ -155,7 +155,7 @@ export function SearchBox({
         aria-expanded={open}
         aria-controls={listboxId}
         className={cn(
-          "h-10 w-full rounded-xl border border-transparent bg-[var(--color-surface)] pr-10 pl-10 text-sm outline-none transition focus:border-[var(--color-brand)] focus:bg-white focus:shadow-[0_0_0_3px_rgba(249,115,22,0.12)]",
+          "h-10 w-full rounded-xl border border-[#c5ced6] bg-white pr-10 pl-10 text-sm outline-none transition focus:border-[var(--color-brand)] focus:shadow-[0_0_0_3px_rgba(36,104,148,0.16)]",
           inputClassName,
         )}
       />

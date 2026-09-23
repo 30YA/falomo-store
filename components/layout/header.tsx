@@ -54,7 +54,7 @@ export function Header() {
       ref={headerRef}
       className="sticky top-0 z-40 border-b border-[var(--color-line)] bg-white/90 backdrop-blur-md"
     >
-      <div className="bg-[var(--color-ink)] py-1.5 text-center text-xs text-white/90">
+      <div className="bg-[var(--color-brand-soft)] py-1.5 text-center text-xs text-[var(--color-brand)]">
         ارسال رایگان برای سفارش‌های بالای ۵ میلیون تومان
       </div>
 
@@ -75,7 +75,7 @@ export function Header() {
 
           <HomeLink
             className="flex shrink-0 items-center"
-            aria-label="فالومو — صفحه اصلی"
+            aria-label="رویان — صفحه اصلی"
           >
             <BrandLogo
               variant="logotype"
@@ -94,7 +94,7 @@ export function Header() {
             >
               <Heart className="h-5 w-5" />
               {shownWishlist > 0 && (
-                <span className="absolute -top-0.5 -left-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-brand)] px-1 text-[10px] font-bold text-white">
+                <span className="absolute -top-1 -left-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-brand)] px-1.5 text-[10px] font-bold text-white">
                   {toPersianDigits(shownWishlist)}
                 </span>
               )}
@@ -106,7 +106,7 @@ export function Header() {
             >
               <ShoppingCart className="h-5 w-5" />
               {shownCart > 0 && (
-                <span className="absolute -top-0.5 -left-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-brand)] px-1 text-[10px] font-bold text-white">
+                <span className="absolute -top-1 -left-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-brand)] px-1.5 text-[10px] font-bold text-white">
                   {toPersianDigits(shownCart)}
                 </span>
               )}
