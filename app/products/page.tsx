@@ -5,7 +5,7 @@ import { ProductsListing } from "@/components/plp/products-listing";
 
 export const metadata: Metadata = {
   title: "محصولات",
-  description: "لیست کامل کالای خواب فالومو با فیلتر برند، قیمت، رنگ و سایز",
+  description: "لیست کالای خواب رویان با فیلتر برند، قیمت، رنگ و سایز",
 };
 
 function ProductsFallback() {

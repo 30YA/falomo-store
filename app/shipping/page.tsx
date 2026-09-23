@@ -5,7 +5,7 @@ import { shippingSections } from "@/data/site-content";
 
 export const metadata: Metadata = {
   title: "ارسال و بازگشت",
-  description: "شرایط ارسال، هزینه پست و مرجوعی کالا در فالومو",
+  description: "شرایط ارسال، هزینه پست و مرجوعی کالا در رویان",
 };
 
 export default function ShippingPage() {

@@ -92,7 +92,7 @@ export function getSearchSuggestions(
   };
 }
 
-const RECENT_KEY = "falomo-recent-searches";
+const RECENT_KEY = "royan-recent-searches";
 const RECENT_LIMIT = 6;
 
 export function getRecentSearches(): string[] {

@@ -12,7 +12,6 @@ const navLinks = [
     href: "/products?amazing=1",
     label: "شگفت‌انگیزها",
     match: "amazing" as const,
-    accent: true,
   },
   { href: "/faq", label: "سوالات متداول", match: "path" as const },
   { href: "/shipping", label: "ارسال و بازگشت", match: "path" as const },
@@ -41,14 +40,9 @@ function DesktopNavLinks() {
             href={link.href}
             className={cn(
               "rounded-lg px-3 py-1.5 text-sm transition",
-              link.accent
-                ? cn(
-                    "font-medium text-[var(--color-brand)] hover:bg-[var(--color-brand-soft)]",
-                    active && "bg-[var(--color-brand-soft)]",
-                  )
-                : active
-                  ? "bg-black/5 font-medium text-[var(--color-ink)]"
-                  : "text-[var(--color-ink-soft)] hover:bg-black/5 hover:text-[var(--color-ink)]",
+              active
+                ? "bg-[var(--color-brand-soft)] font-medium text-[var(--color-brand)]"
+                : "text-[var(--color-ink-soft)] hover:bg-black/[0.04] hover:text-[var(--color-ink)]",
             )}
           >
             {link.label}

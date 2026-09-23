@@ -5,14 +5,14 @@ import { termsSections } from "@/data/site-content";
 
 export const metadata: Metadata = {
   title: "قوانین و مقررات",
-  description: "شرایط استفاده از فروشگاه اینترنتی فالومو",
+  description: "شرایط استفاده از فروشگاه اینترنتی رویان",
 };
 
 export default function TermsPage() {
   return (
     <ContentPage
       title="قوانین و مقررات"
-      description="استفاده از فروشگاه فالومو به معنای پذیرش شرایط زیر است."
+      description="استفاده از فروشگاه رویان به معنای پذیرش شرایط زیر است."
     >
       <div>
         {termsSections.map((section) => (

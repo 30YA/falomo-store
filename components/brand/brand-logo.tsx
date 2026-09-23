@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type BrandLogoVariant = "mark" | "logotype" | "full" | "onDark";
@@ -9,56 +8,73 @@ interface BrandLogoProps {
   priority?: boolean;
 }
 
-const ASSETS: Record<
-  BrandLogoVariant,
-  { src: string; alt: string; width: number; height: number }
-> = {
-  mark: {
-    src: "/brand/mark.png",
-    alt: "فالومو",
-    width: 1024,
-    height: 1024,
-  },
-  logotype: {
-    src: "/brand/logotype.png",
-    alt: "فالومو",
-    width: 739,
-    height: 371,
-  },
-  full: {
-    src: "/brand/logo.png",
-    alt: "فالومو — آرامش، از خانه شروع می‌شود",
-    width: 1024,
-    height: 682,
-  },
-  onDark: {
-    src: "/brand/logo-on-dark.png",
-    alt: "فالومو — آرامش، از خانه شروع می‌شود",
-    width: 1024,
-    height: 682,
-  },
-};
+function Mark({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      className={cn("shrink-0", className)}
+      aria-hidden
+    >
+      <rect width="64" height="64" rx="18" fill="#9FCEEA" />
+      <circle cx="27" cy="36" r="15" fill="#FFFFFF" />
+      <circle cx="36.5" cy="30" r="12.2" fill="#9FCEEA" />
+      <circle cx="49" cy="16" r="3.2" fill="#5EB0DC" />
+    </svg>
+  );
+}
 
 export function BrandLogo({
   variant = "logotype",
   className,
-  priority,
 }: BrandLogoProps) {
-  const asset = ASSETS[variant];
+  if (variant === "mark") {
+    return (
+      <span
+        className={cn("inline-flex aspect-square", className)}
+        role="img"
+        aria-label="رویان"
+      >
+        <Mark className="h-full w-full" />
+      </span>
+    );
+  }
+
+  const onDark = variant === "onDark";
+  const withTagline = variant === "full" || onDark;
 
   return (
     <span
-      className={cn("relative inline-block overflow-hidden", className)}
-      style={{ aspectRatio: `${asset.width} / ${asset.height}` }}
+      className={cn("inline-flex items-center gap-2", className)}
+      role="img"
+      aria-label={withTagline ? "رویان — فروشگاه کالای خواب" : "رویان"}
     >
-      <Image
-        src={asset.src}
-        alt={asset.alt}
-        fill
-        priority={priority}
-        sizes="(max-width: 640px) 160px, 200px"
-        className="object-contain object-right"
-      />
+      <Mark className={withTagline ? "h-12 w-12" : "aspect-square h-full"} />
+      <span
+        className={cn(
+          "flex flex-col leading-none",
+          onDark ? "text-white" : "text-[var(--color-ink)]",
+        )}
+      >
+        <span
+          className={cn(
+            "font-extrabold tracking-tight",
+            withTagline ? "text-2xl" : "text-[1.35rem]",
+            !onDark && "text-[var(--color-brand)]",
+          )}
+        >
+          رویان
+        </span>
+        {withTagline && (
+          <span
+            className={cn(
+              "mt-1 text-[11px] font-medium",
+              onDark ? "text-[#D7EEFB]" : "text-[var(--color-ink-muted)]",
+            )}
+          >
+            کالای خواب
+          </span>
+        )}
+      </span>
     </span>
   );
 }

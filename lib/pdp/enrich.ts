@@ -217,10 +217,10 @@ export function enrichProduct(product: Product): ProductDetail {
     questions: buildQuestions(product),
     ratingBreakdown: buildRatingBreakdown(product),
     seller: {
-      name: "فروشگاه رسمی فالومو",
-      rating: 4.7,
-      performanceLabel: "عملکرد عالی",
-      shippingLabel: product.inStock ? "موجود در انبار فالومو" : "ناموجود",
+      name: "رویان",
+      rating: 4.8,
+      performanceLabel: "تنها فروشنده و تأمین‌کننده",
+      shippingLabel: product.inStock ? "موجود در انبار رویان" : "ناموجود",
       warranty: product.category === "mattress" ? "گارانتی ۲۴ ماهه" : "ضمانت اصالت و سلامت فیزیکی",
     },
   };

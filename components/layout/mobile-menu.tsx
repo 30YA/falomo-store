@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { BrandLogo } from "@/components/brand/brand-logo";
+import { MainNav } from "@/components/layout/main-nav";
 import { categories } from "@/data/products";
 import { useUiStore } from "@/stores/ui-store";
 import { useHasMounted } from "@/lib/hooks/use-has-mounted";
@@ -74,11 +75,13 @@ export function MobileMenu() {
         </div>
 
         <nav className="flex-1 overflow-y-auto p-3">
+          <MainNav variant="list" onNavigate={closeMobileMenu} />
+          <div className="my-2 border-t border-[var(--color-line)]" />
           <div className="flex flex-col gap-1">
             <Link
               href="/categories"
               onClick={closeMobileMenu}
-              className="rounded-xl px-3 py-3 text-sm font-medium hover:bg-[var(--color-surface)]"
+              className="rounded-xl px-3 py-3 text-sm font-medium text-[var(--color-ink-soft)] hover:bg-black/[0.04] hover:text-[var(--color-ink)]"
             >
               همه دسته‌بندی‌ها
             </Link>
@@ -87,7 +90,7 @@ export function MobileMenu() {
                 key={cat.id}
                 href={`/products?category=${cat.slug}`}
                 onClick={closeMobileMenu}
-                className="rounded-xl px-3 py-3 text-sm text-[var(--color-ink-soft)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"
+                className="rounded-xl px-3 py-3 text-sm text-[var(--color-ink-soft)] hover:bg-black/[0.04] hover:text-[var(--color-ink)]"
               >
                 {cat.name}
               </Link>
@@ -95,7 +98,7 @@ export function MobileMenu() {
             <Link
               href="/products?amazing=1"
               onClick={closeMobileMenu}
-              className="rounded-xl px-3 py-3 text-sm font-medium text-[var(--color-brand)] hover:bg-[var(--color-brand-soft)]"
+              className="rounded-xl px-3 py-3 text-sm text-[var(--color-ink-soft)] hover:bg-black/[0.04] hover:text-[var(--color-ink)]"
             >
               پیشنهادهای شگفت‌انگیز
             </Link>
@@ -112,7 +115,7 @@ export function MobileMenu() {
                 key={link.href}
                 href={link.href}
                 onClick={closeMobileMenu}
-                className="rounded-xl px-3 py-3 text-sm text-[var(--color-ink-soft)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"
+                className="rounded-xl px-3 py-3 text-sm text-[var(--color-ink-soft)] hover:bg-black/[0.04] hover:text-[var(--color-ink)]"
               >
                 {link.label}
               </Link>

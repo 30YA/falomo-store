@@ -5,7 +5,7 @@ import { privacySections } from "@/data/site-content";
 
 export const metadata: Metadata = {
   title: "حریم خصوصی",
-  description: "نحوه جمع‌آوری و استفاده از اطلاعات کاربران در فالومو",
+  description: "نحوه جمع‌آوری و استفاده از اطلاعات کاربران در رویان",
 };
 
 export default function PrivacyPage() {

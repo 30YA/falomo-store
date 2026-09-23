@@ -67,7 +67,7 @@ export const banners: Banner[] = [
   {
     id: "b3",
     title: "خواب عمیق، خانه آرام",
-    subtitle: "بالش و تشک‌های ارگونومیک فالومو",
+    subtitle: "بالش و تشک از برندهای ایرانی و خارجی",
     image: `${CDN}/b823a4ac2b6217c8a2004c5a42f626c397956963_1732816862.jpg`,
     href: "/products?category=pillow",
     tone: "cool",
@@ -332,12 +332,12 @@ export const products: Product[] = [
   {
     id: "p10",
     slug: "memory-foam-pillow-ergonomic",
-    title: "بالش مموری فوم ارگونومیک فالومو مدل CloudSleep",
+    title: "بالش مموری فوم ارگونومیک دانلوپیلو مدل CloudSleep",
     shortTitle: "بالش مموری فوم CloudSleep",
     description:
       "بالش ارگونومیک با فوم حافظه‌دار، پشتیبانی از گردن و کاهش فشار نقاط تماس.",
     category: "pillow",
-    brand: "فالومو",
+    brand: "دانلوپیلو",
     images: [
       `${CDN}/1172f51c0a37804fdb245f3e0cf5c67c4d0299c5_1608186050.jpg`,
       `${CDN}/9957fb2dc1d569f06a861eb052ef09e2d53b1edd_1739875837.jpg`,
@@ -358,12 +358,12 @@ export const products: Product[] = [
   {
     id: "p11",
     slug: "cotton-blanket-soft-double",
-    title: "پتو پنبه‌ای نرم فالومو مدل SoftNight دونفره",
+    title: "پتو پنبه‌ای نرم مادام کوکو مدل SoftNight دونفره",
     shortTitle: "پتو SoftNight دونفره",
     description:
       "پتو سبک و گرم با الیاف پنبه‌ای نرم؛ مناسب پاییز و زمستان بدون احساس سنگینی.",
     category: "blanket",
-    brand: "فالومو",
+    brand: "مادام کوکو",
     images: [
       `${CDN}/984f9c02612fa24eda53c596b3db8e009b15f075_1788682855.jpg`,
       `${CDN}/17992e76d9524f29f589438f00a4a6c489fe78e7_1785947037.jpg`,
@@ -387,12 +387,12 @@ export const products: Product[] = [
   {
     id: "p12",
     slug: "orthopedic-mattress-queen",
-    title: "تشک ارتوپدیک فالومو مدل DeepRest سایز ۱۶۰×۲۰۰",
+    title: "تشک ارتوپدیک کاسپر مدل DeepRest سایز ۱۶۰×۲۰۰",
     shortTitle: "تشک DeepRest ۱۶۰",
     description:
       "تشک فنر منفصل با لایه‌های فوم سرد و رویه آنتی‌باکتریال برای خواب عمیق‌تر.",
     category: "mattress",
-    brand: "فالومو",
+    brand: "کاسپر",
     images: [
       `${CDN}/17992e76d9524f29f589438f00a4a6c489fe78e7_1785947037.jpg`,
       `${CDN}/1172f51c0a37804fdb245f3e0cf5c67c4d0299c5_1608186050.jpg`,
@@ -413,12 +413,12 @@ export const products: Product[] = [
   {
     id: "p13",
     slug: "satin-sheet-set-double",
-    title: "سرویس ملحفه ساتن فالومو مدل SilkTouch دونفره چهار تکه",
+    title: "سرویس ملحفه ساتن زارا هوم مدل SilkTouch دونفره چهار تکه",
     shortTitle: "ملحفه ساتن SilkTouch",
     description:
       "ملحفه ساتن براق با حس ابریشمی؛ انتخابی لوکس برای اتاق خواب بزرگسالان.",
     category: "sheet",
-    brand: "فالومو",
+    brand: "زارا هوم",
     images: [
       `${CDN}/e48b95a2490cde8b1091b699cfa3597457af474c_1739811903.jpg`,
       `${CDN}/9583b2aaf491e099bdb486d51314b66b0b8c757c_1789365870.jpg`,
@@ -444,12 +444,12 @@ export const products: Product[] = [
   {
     id: "p14",
     slug: "bamboo-pillow-set-2pcs",
-    title: "بالش بامبو آنتی‌آلرژی فالومو بسته ۲ عددی",
+    title: "بالش بامبو آنتی‌آلرژی بلوم بسته ۲ عددی",
     shortTitle: "بالش بامبو دوتایی",
     description:
       "الیاف بامبو با خاصیت ضدباکتری طبیعی؛ مناسب افراد حساس و آلرژیک.",
     category: "pillow",
-    brand: "فالومو",
+    brand: "بلوم",
     images: [
       `${CDN}/7d9ba0989688983b143d2d39a36f430da1356e0d_1739875833.jpg`,
       `${CDN}/1172f51c0a37804fdb245f3e0cf5c67c4d0299c5_1608186050.jpg`,
@@ -469,12 +469,12 @@ export const products: Product[] = [
   {
     id: "p15",
     slug: "jersey-fitted-sheet-queen",
-    title: "ملحفه کشدار جرسی فالومو مدل StayFit سایز ۱۶۰",
+    title: "ملحفه کشدار جرسی ایکیا مدل StayFit سایز ۱۶۰",
     shortTitle: "ملحفه کشدار StayFit",
     description:
       "ملحفه کشدار جرسی که روی تشک ثابت می‌ماند و چروک نمی‌شود.",
     category: "sheet",
-    brand: "فالومو",
+    brand: "ایکیا",
     images: [
       `${CDN}/9583b2aaf491e099bdb486d51314b66b0b8c757c_1789365870.jpg`,
       `${CDN}/e48b95a2490cde8b1091b699cfa3597457af474c_1739811903.jpg`,
@@ -496,12 +496,12 @@ export const products: Product[] = [
   {
     id: "p16",
     slug: "weighted-blanket-calm",
-    title: "پتو وزن‌دار آرامش‌بخش فالومو مدل CalmWeight ۵ کیلوگرم",
+    title: "پتو وزن‌دار آرامش‌بخش گراویتی مدل CalmWeight ۵ کیلوگرم",
     shortTitle: "پتو وزن‌دار CalmWeight",
     description:
       "پتو وزن‌دار برای کاهش اضطراب و بهبود کیفیت خواب با توزیع یکنواخت فشار.",
     category: "blanket",
-    brand: "فالومو",
+    brand: "گراویتی",
     images: [
       `${CDN}/984f9c02612fa24eda53c596b3db8e009b15f075_1788682855.jpg`,
       `${CDN}/b823a4ac2b6217c8a2004c5a42f626c397956963_1732816862.jpg`,

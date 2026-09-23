@@ -55,7 +55,7 @@ export function HeroSlider({ banners }: HeroSliderProps) {
                     <div className="absolute inset-0 flex items-end justify-start p-5 pb-11 sm:items-center sm:p-10 sm:pb-12 lg:p-14">
                       <div className="max-w-lg space-y-2 text-white sm:space-y-3">
                         <p className="text-xs font-medium tracking-wide text-white/85 sm:text-sm">
-                          فالومو · کالای خواب
+                          رویان · کالای خواب
                         </p>
                         <h1 className="text-2xl font-bold leading-tight drop-shadow-md sm:text-4xl lg:text-5xl">
                           {banner.title}

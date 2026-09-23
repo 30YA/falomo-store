@@ -6,7 +6,7 @@ import { siteContact } from "@/data/site-content";
 
 export const metadata: Metadata = {
   title: "ارتباط با ما",
-  description: "تماس با پشتیبانی فالومو؛ تلفن، ایمیل و فرم پیام",
+  description: "تماس با پشتیبانی رویان؛ تلفن، ایمیل و فرم پیام",
 };
 
 export default function ContactPage() {

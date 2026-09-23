@@ -97,7 +97,7 @@ export function ProductsListing() {
             <SlidersHorizontal className="h-4 w-4" />
             فیلتر
             {activeCount > 0 && (
-              <span className="absolute -top-1.5 -left-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--color-brand)] px-1 text-[10px] font-bold text-white">
+              <span className="absolute -top-2 -left-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--color-brand)] px-1.5 text-[10px] font-bold text-white">
                 {toPersianDigits(activeCount)}
               </span>
             )}

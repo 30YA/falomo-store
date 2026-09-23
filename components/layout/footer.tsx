@@ -19,12 +19,12 @@ export function Footer() {
     <footer className="mt-auto border-t border-[var(--color-line)] bg-white pb-24 lg:pb-0">
       <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-3">
-          <HomeLink aria-label="فالومو" className="inline-block">
+          <HomeLink aria-label="رویان" className="inline-block">
             <BrandLogo variant="full" className="h-auto w-40 sm:w-48" />
           </HomeLink>
           <p className="text-sm leading-7 text-[var(--color-ink-muted)]">
-            فروشگاه تخصصی کالای خواب؛ روتختی، ملحفه، بالش، تشک و پتو با تمرکز روی
-            کیفیت خواب و زیبایی اتاق.
+            فروشگاه کالای خواب رویان. روتختی، ملحفه، بالش، تشک و پتو از برندهای
+            ایرانی و خارجی؛ فروشنده و تأمین‌کننده، رویان است.
           </p>
         </div>
 
@@ -86,7 +86,7 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-[var(--color-line)] py-4 text-center text-xs text-[var(--color-ink-muted)]">
-        © ۱۴۰۴ فالومو — تمامی حقوق محفوظ است.
+        © ۱۴۰۴ رویان — تمامی حقوق محفوظ است.
       </div>
     </footer>
   );

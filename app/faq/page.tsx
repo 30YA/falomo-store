@@ -5,7 +5,7 @@ import { faqItems } from "@/data/site-content";
 
 export const metadata: Metadata = {
   title: "سوالات متداول",
-  description: "پاسخ سوالات رایج درباره سفارش، ارسال، سایز و مرجوعی در فالومو",
+  description: "پاسخ سوالات رایج درباره سفارش، ارسال، سایز و مرجوعی در رویان",
 };
 
 export default function FaqPage() {

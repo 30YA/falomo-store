@@ -26,20 +26,24 @@ export function AmazingOffers({ products }: AmazingOffersProps) {
   return (
     <section className="py-4 sm:py-6">
       <Container>
-        <div className="overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#f97316_0%,#ea580c_55%,#c2410c_100%)] p-3 sm:rounded-3xl sm:p-5">
-          <div className="mb-3 flex items-center justify-between gap-3 text-white sm:mb-4">
+        <div className="overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white p-3 sm:rounded-3xl sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-3 text-[var(--color-ink)] sm:mb-4">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <h2 className="text-base font-bold sm:text-xl">
                 پیشنهاد شگفت‌انگیز
               </h2>
-              <CountdownTimer cycleHours={6} />
+              <CountdownTimer
+                cycleHours={6}
+                digitClassName="bg-white text-[var(--color-brand)] shadow-sm"
+                separatorClassName="text-[var(--color-brand)]"
+              />
             </div>
             <div className="flex items-center gap-2">
               <div className="hidden items-center gap-1 sm:flex">
                 <button
                   ref={prevRef}
                   type="button"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 transition hover:bg-white/25"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--background)] text-[var(--color-ink-soft)] transition hover:text-[var(--color-ink)]"
                   aria-label="قبلی"
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -47,7 +51,7 @@ export function AmazingOffers({ products }: AmazingOffersProps) {
                 <button
                   ref={nextRef}
                   type="button"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 transition hover:bg-white/25"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--background)] text-[var(--color-ink-soft)] transition hover:text-[var(--color-ink)]"
                   aria-label="بعدی"
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -55,7 +59,7 @@ export function AmazingOffers({ products }: AmazingOffersProps) {
               </div>
               <Link
                 href="/products?tag=amazing"
-                className="text-sm text-white/90 transition hover:text-white"
+                className="text-sm text-[var(--color-brand)] transition hover:text-[var(--color-brand-dark)]"
               >
                 مشاهده همه
               </Link>
